@@ -10,9 +10,18 @@ class TennisGame1:
         
     def won_point(self, playerName):
         if playerName == self.player1.get_name():
-            self.player1.set_point(self.player1.get_point() + 1)
+            self.increase_point(self.player1)
         else:
-            self.player2.set_point(self.player2.get_point() + 1)
+            self.increase_point(self.player2)
+    
+    def player_factory(self, playerName):
+        if playerName == self.player1.get_name():
+          return self.player1
+        else:
+          return self.player2
+
+    def increase_point(self, player):
+        player.set_point(player.get_point() + 1)
 
     def is_equal_score(self):
         return self.point_difference() == 0
