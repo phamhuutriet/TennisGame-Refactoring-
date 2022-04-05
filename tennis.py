@@ -25,6 +25,10 @@ class TennisGame1:
 
     def is_match_point(self):
         return self.p1points>=4 or self.p2points>=4
+
+    def is_advantage(self):
+        minusResult = abs(self.p1points-self.p2points)
+        return self.is_match_point() and minusResult==1
     
     def score(self):
         result = ""
@@ -33,15 +37,18 @@ class TennisGame1:
         if self.is_equal_score():
             return self.equal_text()
         # If they both reach 4 or more scores
+        elif self.is_advantage():
+            result ="Advantage "
+            result += self.player1Name if self.p1points > self.p2points else self.player2Name
         elif self.is_match_point():
             # Calculate the difference between the points
             minusResult = abs(self.p1points-self.p2points)
-            # If the difference == 1, Advantage will go for one of them
-            if (minusResult==1):
-                result ="Advantage "
-                result += self.player1Name if self.p1points > self.p2points else self.player2Name
+            # # If the difference == 1, Advantage will go for one of them
+            # if (minusResult==1):
+            #     result ="Advantage "
+            #     result += self.player1Name if self.p1points > self.p2points else self.player2Name
             # If the difference == 2, there will be a winner 
-            else:
+            if minusResult >= 2:
                 result = "Win for "
                 result += self.player1Name if self.p1points > self.p2points else self.player2Name
         # If they only get 3 or less points
