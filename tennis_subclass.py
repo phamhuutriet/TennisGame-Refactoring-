@@ -2,11 +2,6 @@ from player_subclass import Player
 
 class GameState:
   def __init__(self, game):
-      self.player1Name = game.player1Name
-      self.player2Name = game.player2Name
-      self.p1points = game.p1points
-      self.p2points = game.p2points
-
       self.player1 = Player(game.player1Name, game.p1points)
       self.player2 = Player(game.player2Name, game.p2points)
 
