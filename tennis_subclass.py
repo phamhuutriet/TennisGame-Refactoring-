@@ -11,3 +11,7 @@ class GameState:
 class AdvantageState(GameState):
   def generate_score_text(self):
       return "Advantage " + self.player1Name if self.p1points > self.p2points else "Advantage " + self.player2Name
+
+class WonState(GameState):
+  def generate_score_text(self):
+      return "Win for " + self.player1Name if self.p1points > self.p2points else "Win for " + self.player2Name
