@@ -5,14 +5,11 @@ from player_subclass import Player
 class TennisGame1:
 
     def __init__(self, player1Name, player2Name):
-        self.player1Name = player1Name
-        self.player2Name = player2Name
-
         self.player1 = Player(player1Name, 0)
         self.player2 = Player(player2Name, 0)
         
     def won_point(self, playerName):
-        if playerName == self.player1Name:
+        if playerName == self.player1.get_name():
             self.player1.set_point(self.player1.get_point() + 1)
         else:
             self.player2.set_point(self.player2.get_point() + 1)
