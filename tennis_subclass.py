@@ -1,9 +1,9 @@
 from player_subclass import Player
 
 class GameState:
-  def __init__(self, player1, player2):
-      self.player1 = player1
-      self.player2 = player2
+  def __init__(self, game):
+      self.player1 = game.player1
+      self.player2 = game.player2
 
   def generate_score_text(self):
       pass
