@@ -34,7 +34,7 @@ class TennisGame1:
         return self.is_match_point() and self.point_difference() >= 2
 
     def point_difference(self):
-        return abs(self.p1points-self.p2points)
+        return abs(self.player1.get_point()-self.player2.get_point())
     
     def gameState_factory(self):
         if self.is_advantage():
