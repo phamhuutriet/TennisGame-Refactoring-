@@ -38,13 +38,13 @@ class TennisGame1:
     
     def gameState_factory(self):
         if self.is_advantage():
-          return AdvantageState(self)
+          return AdvantageState(self, self.player1)
         elif self.is_won():
-          return WonState(self)
+          return WonState(self, self.player1)
         elif self.is_equal_score():
-          return EqualState(self)
+          return EqualState(self, self.player1)
         else:
-          return NormalState(self)
+          return NormalState(self, self.player1)
 
     def score(self):
         return self.gameState_factory().generate_score_text()
