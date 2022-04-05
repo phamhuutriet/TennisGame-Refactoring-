@@ -8,13 +8,14 @@ class GameState:
       self.p2points = game.p2points
 
       self.player1 = Player(game.player1Name, game.p1points)
+      self.player2 = Player(game.player2Name, game.p2points)
 
   def generate_score_text(self):
       pass
 
 class AdvantageState(GameState):
   def generate_score_text(self):
-      return "Advantage " + self.player1.get_name() if self.player1.get_point() > self.p2points else "Advantage " + self.player2Name
+      return "Advantage " + self.player1.get_name() if self.player1.get_point() > self.player2.get_point() else "Advantage " + self.player2.get_name()
 
 class WonState(GameState):
   def generate_score_text(self):
