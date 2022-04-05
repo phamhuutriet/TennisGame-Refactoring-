@@ -8,3 +8,6 @@ class Player:
 
   def get_point(self):
     return self._point
+
+  def set_point(self, new_point):
+    self._point = new_point
