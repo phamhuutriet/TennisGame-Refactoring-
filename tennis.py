@@ -29,6 +29,9 @@ class TennisGame1:
     def is_advantage(self):
         minusResult = abs(self.p1points-self.p2points)
         return self.is_match_point() and minusResult==1
+    
+    def advantage_text(self):
+        return "Advantage " + self.player1Name if self.p1points > self.p2points else "Advantage " + self.player2Name
 
     def is_won(self):
         minusResult = abs(self.p1points-self.p2points)
@@ -42,8 +45,7 @@ class TennisGame1:
             return self.equal_text()
         # If they both reach 4 or more scores
         elif self.is_advantage():
-            result ="Advantage "
-            result += self.player1Name if self.p1points > self.p2points else self.player2Name
+            return self.advantage_text()
         elif self.is_won():
             result = "Win for "
             result += self.player1Name if self.p1points > self.p2points else self.player2Name
