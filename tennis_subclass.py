@@ -23,3 +23,13 @@ class EqualState(GameState):
                 1 : "Fifteen-All",
                 2 : "Thirty-All",
             }.get(self.p1points, "Deuce")
+
+class NormalState(GameState):
+  def generate_score_text(self):
+      score_dict = {
+                    0 : "Love",
+                    1 : "Fifteen",
+                    2 : "Thirty",
+                    3 : "Forty",
+                }
+      return score_dict[self.p1points] + "-" + score_dict[self.p2points]

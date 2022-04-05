@@ -28,15 +28,6 @@ class TennisGame1:
     def is_won(self):
         minusResult = abs(self.p1points-self.p2points)
         return self.is_match_point() and minusResult >= 2
-
-    def normal_score_text(self):
-        score_dict = {
-                    0 : "Love",
-                    1 : "Fifteen",
-                    2 : "Thirty",
-                    3 : "Forty",
-                }
-        return score_dict[self.p1points] + "-" + score_dict[self.p2points]
     
     def gameState_factory(self):
         if self.is_advantage():
@@ -45,6 +36,8 @@ class TennisGame1:
           return WonState(self.player1Name, self.player2Name, self.p1points, self.p2points)
         elif self.is_equal_score():
           return EqualState(self.player1Name, self.player2Name, self.p1points, self.p2points)
+        else:
+          return NormalState(self.player1Name, self.player2Name, self.p1points, self.p2points)
 
     def score(self):
         if self.is_advantage():
@@ -54,7 +47,7 @@ class TennisGame1:
         elif self.is_won():
             return self.gameState_factory().generate_score_text()
         else:
-            return self.normal_score_text()
+            return self.gameState_factory().generate_score_text()
 
 
 class TennisGame2:
