@@ -82,6 +82,9 @@ class TennisGame2:
       if self.is_matchpoint():
           return "Deuce"
 
+    def is_onesided_score_player1(self):
+      return self.p1points > 0 and self.p2points==0
+
     def handle_onesided_score_player1(self, P1res):
       if (self.p1points==1):
           P1res = "Fifteen"
@@ -114,7 +117,7 @@ class TennisGame2:
           result = self.handle_equal()
         
         # One-sided score on player1 side
-        elif (self.p1points > 0 and self.p2points==0):
+        elif self.is_onesided_score_player1():
             result = self.handle_onesided_score_player1(P1res)
         # One-sided score on player2 side
         elif (self.p2points > 0 and self.p1points==0):
