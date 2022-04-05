@@ -22,12 +22,13 @@ class TennisGame1:
         return self.p1points>=4 or self.p2points>=4
 
     def is_advantage(self):
-        minusResult = abs(self.p1points-self.p2points)
-        return self.is_match_point() and minusResult==1
+        return self.is_match_point() and self.point_difference() ==1
 
     def is_won(self):
-        minusResult = abs(self.p1points-self.p2points)
-        return self.is_match_point() and minusResult >= 2
+        return self.is_match_point() and self.point_difference() >= 2
+
+    def point_difference(self):
+        return abs(self.p1points-self.p2points)
     
     def gameState_factory(self):
         if self.is_advantage():
