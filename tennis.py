@@ -82,27 +82,31 @@ class TennisGame2:
       if self.is_matchpoint():
           return "Deuce"
 
+    def handle_onesided_score_player1(self, P1res):
+      if (self.p1points==1):
+          P1res = "Fifteen"
+      if (self.p1points==2):
+          P1res = "Thirty"
+      if (self.p1points==3):
+          P1res = "Forty"
+      
+      P2res = "Love"
+      return P1res + "-" + P2res
+
+
     def score(self):
         result = ""
+        P1res = ""
+        P2res = ""
         # Equal score state but it's not passed the matchpoint
         if self.is_equal_score():
           result = self.handle_equal()
         
-        P1res = ""
-        P2res = ""
         # One-sided score on player1 side
-        if (self.p1points > 0 and self.p2points==0):
-            if (self.p1points==1):
-                P1res = "Fifteen"
-            if (self.p1points==2):
-                P1res = "Thirty"
-            if (self.p1points==3):
-                P1res = "Forty"
-            
-            P2res = "Love"
-            result = P1res + "-" + P2res
+        elif (self.p1points > 0 and self.p2points==0):
+            result = self.handle_onesided_score_player1(P1res)
         # One-sided score on player2 side
-        if (self.p2points > 0 and self.p1points==0):
+        elif (self.p2points > 0 and self.p1points==0):
             if (self.p2points==1):
                 P2res = "Fifteen"
             if (self.p2points==2):
@@ -114,7 +118,7 @@ class TennisGame2:
             result = P1res + "-" + P2res
         
         # Non-zero score on player1 side
-        if (self.p1points>self.p2points and self.p1points < 4):
+        elif (self.p1points>self.p2points and self.p1points < 4):
             if (self.p1points==2):
                 P1res="Thirty"
             if (self.p1points==3):
@@ -125,7 +129,7 @@ class TennisGame2:
                 P2res="Thirty"
             result = P1res + "-" + P2res
         # Non-zero score on player2 side
-        if (self.p2points>self.p1points and self.p2points < 4):
+        elif (self.p2points>self.p1points and self.p2points < 4):
             if (self.p2points==2):
                 P2res="Thirty"
             if (self.p2points==3):
@@ -137,10 +141,10 @@ class TennisGame2:
             result = P1res + "-" + P2res
         
         # Advantage state
-        if (self.p1points > self.p2points and self.p2points >= 3):
+        elif (self.p1points > self.p2points and self.p2points >= 3):
             result = "Advantage " + self.player1Name
         
-        if (self.p2points > self.p1points and self.p1points >= 3):
+        elif (self.p2points > self.p1points and self.p1points >= 3):
             result = "Advantage " + self.player2Name
         
         # Win state
