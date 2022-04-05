@@ -17,13 +17,6 @@ class TennisGame1:
 
     def is_equal_score(self):
         return self.p1points==self.p2points
-    
-    def equal_text(self):
-        return {
-                0 : "Love-All",
-                1 : "Fifteen-All",
-                2 : "Thirty-All",
-            }.get(self.p1points, "Deuce")
 
     def is_match_point(self):
         return self.p1points>=4 or self.p2points>=4
@@ -35,9 +28,6 @@ class TennisGame1:
     def is_won(self):
         minusResult = abs(self.p1points-self.p2points)
         return self.is_match_point() and minusResult >= 2
-
-    def won_text(self):
-        return "Win for " + self.player1Name if self.p1points > self.p2points else "Win for " + self.player2Name
 
     def normal_score_text(self):
         score_dict = {
@@ -53,12 +43,14 @@ class TennisGame1:
           return AdvantageState(self.player1Name, self.player2Name, self.p1points, self.p2points)
         elif self.is_won():
           return WonState(self.player1Name, self.player2Name, self.p1points, self.p2points)
+        elif self.is_equal_score():
+          return EqualState(self.player1Name, self.player2Name, self.p1points, self.p2points)
 
     def score(self):
         if self.is_advantage():
             return self.gameState_factory().generate_score_text()
         if self.is_equal_score():
-            return self.equal_text()
+            return self.gameState_factory().generate_score_text()
         elif self.is_won():
             return self.gameState_factory().generate_score_text()
         else:
