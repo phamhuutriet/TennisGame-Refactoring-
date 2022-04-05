@@ -27,7 +27,7 @@ class EqualState(GameState):
                 0 : "Love-All",
                 1 : "Fifteen-All",
                 2 : "Thirty-All",
-            }.get(self.p1points, "Deuce")
+            }.get(self.player1.get_point(), "Deuce")
 
 class NormalState(GameState):
   def generate_score_text(self):
