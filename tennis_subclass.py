@@ -37,4 +37,4 @@ class NormalState(GameState):
                     2 : "Thirty",
                     3 : "Forty",
                 }
-      return score_dict[self.p1points] + "-" + score_dict[self.p2points]
+      return score_dict[self.player1.get_point()] + "-" + score_dict[self.player2.get_point()]
