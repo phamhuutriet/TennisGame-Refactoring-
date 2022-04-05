@@ -9,16 +9,13 @@ class TennisGame1:
         self.player2 = Player(player2Name, 0)
         
     def won_point(self, playerName):
-        if playerName == self.player1.get_name():
-            self.increase_point(self.player1)
-        else:
-            self.increase_point(self.player2)
+        self.increase_point(self.player_factory(playerName))
+
+    def score(self):
+        return self.gameState_factory().generate_score_text()
     
     def player_factory(self, playerName):
-        if playerName == self.player1.get_name():
-          return self.player1
-        else:
-          return self.player2
+        return self.player1 if self.player1.get_name() == playerName else self.player2
 
     def increase_point(self, player):
         player.set_point(player.get_point() + 1)
@@ -47,9 +44,6 @@ class TennisGame1:
           return EqualState(self)
         else:
           return NormalState(self)
-
-    def score(self):
-        return self.gameState_factory().generate_score_text()
 
 
 class TennisGame2:
