@@ -12,12 +12,23 @@ class TennisGame1:
             self.p1points += 1
         else:
             self.p2points += 1
+
+    def is_equal_score(self):
+        return self.p1points==self.p2points
+    
+    def equal_text(self):
+        result = {
+                0 : "Love-All",
+                1 : "Fifteen-All",
+                2 : "Thirty-All",
+            }.get(self.p1points, "Deuce")
+        return result
     
     def score(self):
         result = ""
         tempScore=0
         # Return equal statement
-        if (self.p1points==self.p2points):
+        if self.is_equal_score():
             result = {
                 0 : "Love-All",
                 1 : "Fifteen-All",
