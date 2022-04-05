@@ -25,7 +25,7 @@ class TennisGame1:
         return self.point_difference() == 0
 
     def is_match_point(self):
-        return self.p1points>=4 or self.p2points>=4
+        return self.player1.get_point()>=4 or self.player2.get_point()>=4
 
     def is_advantage(self):
         return self.is_match_point() and self.point_difference() ==1
