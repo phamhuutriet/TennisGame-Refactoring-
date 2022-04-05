@@ -39,11 +39,17 @@ class TennisGame1:
 
     def won_text(self):
         return "Win for " + self.player1Name if self.p1points > self.p2points else "Win for " + self.player2Name
+
+    def normal_score_text(self):
+        score_dict = {
+                    0 : "Love",
+                    1 : "Fifteen",
+                    2 : "Thirty",
+                    3 : "Forty",
+                }
+        return score_dict[self.p1points] + "-" + score_dict[self.p2points]
     
     def score(self):
-        result = ""
-        tempScore=0
-
         if self.is_equal_score():
             return self.equal_text()
         elif self.is_advantage():
@@ -51,21 +57,7 @@ class TennisGame1:
         elif self.is_won():
             return self.won_text()
         else:
-            for i in range(1,3):
-                if (i==1):
-                    tempScore = self.p1points
-                else:
-                    # Add - when we start to add the score of the second player
-                    result+="-"
-                    tempScore = self.p2points
-                # Add score text based on the points
-                result += {
-                    0 : "Love",
-                    1 : "Fifteen",
-                    2 : "Thirty",
-                    3 : "Forty",
-                }[tempScore]
-        return result
+            return self.normal_score_text()
 
 
 class TennisGame2:
