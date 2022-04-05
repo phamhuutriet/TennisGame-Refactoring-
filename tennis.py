@@ -66,9 +66,9 @@ class TennisGame2:
             self.P1Score()
         else:
             self.P2Score()
-    
-    def is_equal_not_matchppoint(self):
-      return self.p1points == self.p2points and self.p1points < 3
+  
+    def is_not_matchpoint(self):
+      return self.p1points < 3
 
     def is_equal_matchpoint(self):
       return self.p1points==self.p2points and self.p1points>2
@@ -77,7 +77,7 @@ class TennisGame2:
       return self.p1points == self.p2points
     
     def handle_equal(self):
-      if self.is_equal_not_matchppoint():
+      if self.is_not_matchpoint():
           result = self.score_text_dict[self.p1points] + "-All"
       # Equal score state but it's passed the matchpoint
       if self.is_equal_matchpoint():
