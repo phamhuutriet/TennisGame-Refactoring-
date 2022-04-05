@@ -1,4 +1,5 @@
 from tennis_subclass import *
+from player_subclass import Player
 
 
 class TennisGame1:
@@ -16,7 +17,7 @@ class TennisGame1:
             self.p2points += 1
 
     def is_equal_score(self):
-        return self.p1points==self.p2points
+        return self.point_difference() == 0
 
     def is_match_point(self):
         return self.p1points>=4 or self.p2points>=4

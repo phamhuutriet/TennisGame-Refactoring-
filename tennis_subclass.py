@@ -1,3 +1,5 @@
+from player_subclass import Player
+
 class GameState:
   def __init__(self, game):
       self.player1Name = game.player1Name
@@ -5,12 +7,14 @@ class GameState:
       self.p1points = game.p1points
       self.p2points = game.p2points
 
+      self.player1 = Player(game.player1Name, game.p1points)
+
   def generate_score_text(self):
       pass
 
 class AdvantageState(GameState):
   def generate_score_text(self):
-      return "Advantage " + self.player1Name if self.p1points > self.p2points else "Advantage " + self.player2Name
+      return "Advantage " + self.player1.get_name() if self.player1.get_point() > self.p2points else "Advantage " + self.player2Name
 
 class WonState(GameState):
   def generate_score_text(self):
