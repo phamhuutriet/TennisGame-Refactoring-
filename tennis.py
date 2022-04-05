@@ -1,3 +1,6 @@
+from tennis_subclass import *
+
+
 class TennisGame1:
 
     def __init__(self, player1Name, player2Name):
@@ -7,7 +10,6 @@ class TennisGame1:
         self.p2points = 0
         
     def won_point(self, playerName):
-      # Increment a player's point by 1 if they win
         if playerName == self.player1Name:
             self.p1points += 1
         else:
@@ -29,9 +31,6 @@ class TennisGame1:
     def is_advantage(self):
         minusResult = abs(self.p1points-self.p2points)
         return self.is_match_point() and minusResult==1
-    
-    def advantage_text(self):
-        return "Advantage " + self.player1Name if self.p1points > self.p2points else "Advantage " + self.player2Name
 
     def is_won(self):
         minusResult = abs(self.p1points-self.p2points)
@@ -49,11 +48,15 @@ class TennisGame1:
                 }
         return score_dict[self.p1points] + "-" + score_dict[self.p2points]
     
+    def gameState_factory(self):
+        if self.is_advantage():
+          return AdvantageState(self.player1Name, self.player2Name, self.p1points, self.p2points)
+
     def score(self):
+        if self.is_advantage():
+            return self.gameState_factory().generate_score_text()
         if self.is_equal_score():
             return self.equal_text()
-        elif self.is_advantage():
-            return self.advantage_text()
         elif self.is_won():
             return self.won_text()
         else:
