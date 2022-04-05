@@ -60,9 +60,13 @@ class TennisGame2:
         else:
             self.P2Score()
     
+    def is_equal(self):
+      return self.p1points == self.p2points and self.p1points < 3
+
     def score(self):
         result = ""
-        if (self.p1points == self.p2points and self.p1points < 3):
+        # Equal score state but it's not passed the matchpoint
+        if self.is_equal():
             if (self.p1points==0):
                 result = "Love"
             if (self.p1points==1):
@@ -70,11 +74,13 @@ class TennisGame2:
             if (self.p1points==2):
                 result = "Thirty"
             result += "-All"
+        # Equal score state but it's passed the matchpoint
         if (self.p1points==self.p2points and self.p1points>2):
             result = "Deuce"
         
         P1res = ""
         P2res = ""
+        # One-sided score on player1 side
         if (self.p1points > 0 and self.p2points==0):
             if (self.p1points==1):
                 P1res = "Fifteen"
@@ -85,6 +91,7 @@ class TennisGame2:
             
             P2res = "Love"
             result = P1res + "-" + P2res
+        # One-sided score on player2 side
         if (self.p2points > 0 and self.p1points==0):
             if (self.p2points==1):
                 P2res = "Fifteen"
@@ -96,7 +103,7 @@ class TennisGame2:
             P1res = "Love"
             result = P1res + "-" + P2res
         
-        
+        # Non-zero score on player1 side
         if (self.p1points>self.p2points and self.p1points < 4):
             if (self.p1points==2):
                 P1res="Thirty"
@@ -107,6 +114,7 @@ class TennisGame2:
             if (self.p2points==2):
                 P2res="Thirty"
             result = P1res + "-" + P2res
+        # Non-zero score on player2 side
         if (self.p2points>self.p1points and self.p2points < 4):
             if (self.p2points==2):
                 P2res="Thirty"
@@ -118,12 +126,14 @@ class TennisGame2:
                 P1res="Thirty"
             result = P1res + "-" + P2res
         
+        # Advantage state
         if (self.p1points > self.p2points and self.p2points >= 3):
             result = "Advantage " + self.player1Name
         
         if (self.p2points > self.p1points and self.p1points >= 3):
             result = "Advantage " + self.player2Name
         
+        # Win state
         if (self.p1points>=4 and self.p2points>=0 and (self.p1points-self.p2points)>=2):
             result = "Win for " + self.player1Name
         if (self.p2points>=4 and self.p1points>=0 and (self.p2points-self.p1points)>=2):
@@ -133,9 +143,9 @@ class TennisGame2:
     def P1Score(self):
         self.p1points +=1
     
-    
     def P2Score(self):
         self.p2points +=1
+
         
 class TennisGame3:
     def __init__(self, player1Name, player2Name):
