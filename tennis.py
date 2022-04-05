@@ -17,19 +17,18 @@ class TennisGame1:
         return self.p1points==self.p2points
     
     def equal_text(self):
-        result = {
+        return {
                 0 : "Love-All",
                 1 : "Fifteen-All",
                 2 : "Thirty-All",
             }.get(self.p1points, "Deuce")
-        return result
     
     def score(self):
         result = ""
         tempScore=0
-        
+
         if self.is_equal_score():
-            result = self.equal_text()
+            return self.equal_text()
         # If they both reach 4 or more scores
         elif (self.p1points>=4 or self.p2points>=4):
             # Calculate the difference between the points
