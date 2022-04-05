@@ -32,13 +32,13 @@ class TennisGame1:
     
     def gameState_factory(self):
         if self.is_advantage():
-          return AdvantageState(self.p2points, self)
+          return AdvantageState(self)
         elif self.is_won():
-          return WonState(self.p2points, self)
+          return WonState(self)
         elif self.is_equal_score():
-          return EqualState(self.p2points, self)
+          return EqualState(self)
         else:
-          return NormalState(self.p2points, self)
+          return NormalState(self)
 
     def score(self):
         return self.gameState_factory().generate_score_text()
