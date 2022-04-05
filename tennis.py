@@ -53,6 +53,13 @@ class TennisGame2:
         self.player2Name = player2Name
         self.p1points = 0
         self.p2points = 0
+
+        self.score_text_dict = {
+          0: "Love",
+          1: "Fifteen",
+          2: "Thirty",
+          3: "Forty"
+        }
         
     def won_point(self, playerName):
         if playerName == self.player1Name:
@@ -60,22 +67,19 @@ class TennisGame2:
         else:
             self.P2Score()
     
-    def is_equal(self):
+    def is_equal_not_matchppoint(self):
       return self.p1points == self.p2points and self.p1points < 3
+
+    def is_equal_matchpoint(self):
+      return self.p1points==self.p2points and self.p1points>2
 
     def score(self):
         result = ""
         # Equal score state but it's not passed the matchpoint
-        if self.is_equal():
-            if (self.p1points==0):
-                result = "Love"
-            if (self.p1points==1):
-                result = "Fifteen"
-            if (self.p1points==2):
-                result = "Thirty"
-            result += "-All"
+        if self.is_equal_not_matchppoint():
+            result = self.score_text_dict[self.p1points] + "-All"
         # Equal score state but it's passed the matchpoint
-        if (self.p1points==self.p2points and self.p1points>2):
+        if self.is_equal_matchpoint():
             result = "Deuce"
         
         P1res = ""
