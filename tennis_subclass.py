@@ -1,8 +1,8 @@
 class GameState:
-  def __init__(self, p1points, p2points, game):
+  def __init__(self, p2points, game):
       self.player1Name = game.player1Name
       self.player2Name = game.player2Name
-      self.p1points = p1points
+      self.p1points = game.p1points
       self.p2points = p2points
 
   def generate_score_text(self):
