@@ -7,6 +7,7 @@ class TennisGame1:
         self.p2points = 0
         
     def won_point(self, playerName):
+      # Increment a player's point by 1 if they win
         if playerName == self.player1Name:
             self.p1points += 1
         else:
@@ -15,29 +16,37 @@ class TennisGame1:
     def score(self):
         result = ""
         tempScore=0
+        # Return equal statement
         if (self.p1points==self.p2points):
             result = {
                 0 : "Love-All",
                 1 : "Fifteen-All",
                 2 : "Thirty-All",
             }.get(self.p1points, "Deuce")
+        # If they both reach 4 or more scores
         elif (self.p1points>=4 or self.p2points>=4):
+            # Calculate the difference between the points
             minusResult = self.p1points-self.p2points
+            # If the difference == 1, Advantage will go for one of them
             if (minusResult==1):
                 result ="Advantage " + self.player1Name
             elif (minusResult ==-1):
                 result ="Advantage " + self.player2Name
+            # If the difference == 2, there will be a winner 
             elif (minusResult>=2):
                 result = "Win for " + self.player1Name
             else:
                 result ="Win for " + self.player2Name
+        # If they only get 3 or less points
         else:
             for i in range(1,3):
                 if (i==1):
                     tempScore = self.p1points
                 else:
+                    # Add - when we start to add the score of the second player
                     result+="-"
                     tempScore = self.p2points
+                # Add score text based on the points
                 result += {
                     0 : "Love",
                     1 : "Fifteen",
