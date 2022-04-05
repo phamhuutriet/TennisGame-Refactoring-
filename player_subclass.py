@@ -3,10 +3,10 @@ class Player:
     self._playerName = playerName
     self._point = point
 
-  def get_name(self):
+  def name(self):
     return self._playerName
-
-  def get_point(self):
+  
+  def point(self):
     return self._point
 
   def set_point(self, new_point):

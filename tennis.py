@@ -15,16 +15,16 @@ class TennisGame1:
         return self.gameState_factory().generate_score_text()
     
     def player_factory(self, playerName):
-        return self.player1 if self.player1.get_name() == playerName else self.player2
+        return self.player1 if self.player1.name() == playerName else self.player2
 
     def increase_point(self, player):
-        player.set_point(player.get_point() + 1)
+        player.set_point(player.point() + 1)
 
     def is_equal_score(self):
         return self.point_difference() == 0
 
     def is_match_point(self):
-        return self.player1.get_point()>=4 or self.player2.get_point()>=4
+        return self.player1.point()>=4 or self.player2.point()>=4
 
     def is_advantage(self):
         return self.is_match_point() and self.point_difference() ==1
@@ -33,7 +33,7 @@ class TennisGame1:
         return self.is_match_point() and self.point_difference() >= 2
 
     def point_difference(self):
-        return abs(self.player1.get_point()-self.player2.get_point())
+        return abs(self.player1.point()-self.player2.point())
     
     def gameState_factory(self):
         if self.is_advantage():
