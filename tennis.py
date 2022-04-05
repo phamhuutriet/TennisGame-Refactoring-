@@ -32,17 +32,15 @@ class TennisGame1:
         # If they both reach 4 or more scores
         elif (self.p1points>=4 or self.p2points>=4):
             # Calculate the difference between the points
-            minusResult = self.p1points-self.p2points
+            minusResult = abs(self.p1points-self.p2points)
             # If the difference == 1, Advantage will go for one of them
             if (minusResult==1):
-                result ="Advantage " + self.player1Name
-            elif (minusResult ==-1):
-                result ="Advantage " + self.player2Name
+                result ="Advantage "
+                result += self.player1Name if self.p1points > self.p2points else self.player2Name
             # If the difference == 2, there will be a winner 
-            elif (minusResult>=2):
-                result = "Win for " + self.player1Name
             else:
-                result ="Win for " + self.player2Name
+                result = "Win for "
+                result += self.player1Name if self.p1points > self.p2points else self.player2Name
         # If they only get 3 or less points
         else:
             for i in range(1,3):
