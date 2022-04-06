@@ -105,6 +105,15 @@ class TennisGame2:
     def handle_normal(self):
       return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
+    def player1_is_advantage(self):
+      return self.p1points > self.p2points and self.p2points >= 3
+
+    def player2_is_advantage(self):
+      return self.p2points > self.p1points and self.p1points >= 3
+
+    def is_advantage_score(self):
+      return self.player1_is_advantage() or self.player2_is_advantage()
+
     def score(self):
         result = ""
         P1res = ""
@@ -119,14 +128,15 @@ class TennisGame2:
         
         # Non-zero score on player1 side
         elif self.is_normal_score():
-            result = self.handle_normal()
+          result = self.handle_normal()
         
         # Advantage state
-        elif (self.p1points > self.p2points and self.p2points >= 3):
-            result = "Advantage " + self.player1Name
-        
-        elif (self.p2points > self.p1points and self.p1points >= 3):
-            result = "Advantage " + self.player2Name
+        elif self.is_advantage_score():
+          if self.player1_is_advantage():
+              result = "Advantage " + self.player1Name
+          
+          elif self.player2_is_advantage():
+              result = "Advantage " + self.player2Name
         
         # Win state
         if (self.p1points>=4 and self.p2points>=0 and (self.p1points-self.p2points)>=2):
