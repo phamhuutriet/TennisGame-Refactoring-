@@ -22,10 +22,10 @@ class GameState:
 
 class WinnerState(GameState):
   def player1_is_winner(self):
-    return self.player1.point() >= 4 and self.player2.point() >= 0 and (self.player1.point()-self.player2.point()) >=2
+    return self.player1.point() > self.player2.point()
 
   def player2_is_winner(self):
-    return self.player2.point() >= 4 and self.player1.point() >= 0 and (self.player2.point()-self.player1.point()) >=2
+    return self.player2.point() > self.player1.point()
 
   def handle_state(self):
     if self.player1_is_winner():
