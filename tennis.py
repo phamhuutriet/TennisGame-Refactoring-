@@ -89,42 +89,27 @@ class TennisGame2:
     def is_onesided_score_player1(self):
       return self.p1points > 0 and self.p2points==0
 
-    def handle_onesided_score_player1(self):
-      P1res = P2res = ""
-      if (self.player1.point()==1):
-          P1res = "Fifteen"
-      if (self.player1.point()==2):
-          P1res = "Thirty"
-      if (self.player1.point()==3):
-          P1res = "Forty"
-      
-      P2res = "Love"
-      return P1res + "-" + P2res
-
     def is_onesided_score_player2(self):
       return self.p2points > 0 and self.p1points==0
 
-    def handle_onesided_score_player2(self, P2res):
-      if (self.p2points==1):
+    def handle_onesided_score_player2(self, player2):
+      P1res = P2res = ""
+      if (player2.point()==1):
           P2res = "Fifteen"
-      if (self.p2points==2):
+      if (player2.point()==2):
           P2res = "Thirty"
-      if (self.p2points==3):
+      if (player2.point()==3):
           P2res = "Forty"
       
       P1res = "Love"
       return P1res + "-" + P2res
 
-    def handle_onesided_score_player(self, player):
+    def handle_onesided_score_player(self, player1, player2):
       P1res = P2res = ""
-      if (player.point()==1):
-          P1res = "Fifteen"
-      if (player.point()==2):
-          P1res = "Thirty"
-      if (player.point()==3):
-          P1res = "Forty"
-      
-      P2res = "Love"
+      if player1.point() <= 3:
+        P1res = self.score_text_dict[player1.point()]
+      if player2.point() <= 3:
+        P2res = self.score_text_dict[player2.point()]
       return P1res + "-" + P2res
 
     def is_onesided_score(self):
@@ -133,9 +118,9 @@ class TennisGame2:
     def handle_onesided_score(self):
       P1res = P2res = ""
       if self.is_onesided_score_player1():
-          result = self.handle_onesided_score_player(self.player1)
+          result = self.handle_onesided_score_player(self.player1, self.player2)
       elif self.is_onesided_score_player2():
-          result = self.handle_onesided_score_player2(P2res)
+          result = self.handle_onesided_score_player(self.player1, self.player2)
       return result
 
     def score(self):
