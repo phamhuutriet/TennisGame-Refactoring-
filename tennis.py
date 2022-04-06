@@ -86,21 +86,9 @@ class TennisGame2:
     def handle_normal(self):
       return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
-    def player1_is_advantage(self):
-      return self.player1.point() > self.player2.point() >= 3
-
-    def player2_is_advantage(self):
-      return self.player2.point() > self.player1.point() >= 3
-
     def is_advantage_score(self):
       return self.player1.point() >= 3 and self.player2.point() >= 3
 
-    def handle_advantage(self):
-      if self.player1_is_advantage():
-        return "Advantage " + self.player1.name()
-      elif self.player2_is_advantage():
-        return "Advantage " + self.player2.name()
-        
     def is_win_score(self):
       score_diff = abs(self.player1.point() - self.player2.point())
       return score_diff >= 2 and (self.player1.point() >= 4 or self.player2.point() >= 4)
@@ -108,6 +96,8 @@ class TennisGame2:
     def gamestate_factory(self):
       if self.is_win_score():
         return tennis2.WinnerState(self)
+      elif self.is_advantage_score():
+        return tennis2.AdvantageState(self)
 
     def score(self):
         if self.is_win_score():
@@ -117,7 +107,7 @@ class TennisGame2:
           return self.handle_equal()
 
         elif self.is_advantage_score():
-          return self.handle_advantage()
+          return self.gamestate_factory().handle_state()
         
         elif self.is_onesided_score():
           return self.handle_onesided_score()

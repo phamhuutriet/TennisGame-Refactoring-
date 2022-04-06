@@ -32,3 +32,16 @@ class WinnerState(GameState):
       return "Win for " + self.player1.name()
     if self.player2_is_winner():
       return "Win for " + self.player2.name()
+
+class AdvantageState(GameState):
+  def player1_is_advantage(self):
+    return self.player1.point() > self.player2.point() >= 3
+
+  def player2_is_advantage(self):
+    return self.player2.point() > self.player1.point() >= 3
+
+  def handle_state(self):
+    if self.player1_is_advantage():
+      return "Advantage " + self.player1.name()
+    elif self.player2_is_advantage():
+      return "Advantage " + self.player2.name()
