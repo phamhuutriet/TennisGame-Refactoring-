@@ -112,26 +112,9 @@ class TennisGame2:
           result = self.handle_onesided_score()
         
         # Non-zero score on player1 side
-        elif (self.p1points>self.p2points and self.p1points < 4):
-            if (self.p1points==2):
-                P1res="Thirty"
-            if (self.p1points==3):
-                P1res="Forty"
-            if (self.p2points==1):
-                P2res="Fifteen"
-            if (self.p2points==2):
-                P2res="Thirty"
-            result = P1res + "-" + P2res
-        # Non-zero score on player2 side
-        elif (self.p2points>self.p1points and self.p2points < 4):
-            if (self.p2points==2):
-                P2res="Thirty"
-            if (self.p2points==3):
-                P2res="Forty"
-            if (self.p1points==1):
-                P1res="Fifteen"
-            if (self.p1points==2):
-                P1res="Thirty"
+        elif (self.p1points>self.p2points and self.p1points < 4) or (self.p2points>self.p1points and self.p2points < 4):
+            P1res = self.score_text_dict[self.player1.point()]
+            P2res = self.score_text_dict[self.player2.point()]
             result = P1res + "-" + P2res
         
         # Advantage state
