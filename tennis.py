@@ -65,23 +65,12 @@ class TennisGame2:
             self.P1Score()
         else:
             self.P2Score()
-  
-    def is_not_matchpoint(self):
-      return self.player1.point() < 3
 
     def is_equal_score(self):
       return self.player1.point() == self.player2.point()
-    
-    def handle_equal(self):
-      if self.is_not_matchpoint():
-          return self.score_text_dict[self.player1.point()] + "-All"
-      return "Deuce"
 
     def is_onesided_score(self):
       return self.player1.point() == 0 or self.player2.point() == 0
-
-    def handle_normal(self):
-      return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
     def is_advantage_score(self):
       return self.player1.point() >= 3 and self.player2.point() >= 3
@@ -99,23 +88,11 @@ class TennisGame2:
         return tennis2.AdvantageState(self)
       elif self.is_onesided_score():
         return tennis2.OneSidedState(self)
+      else:
+        return tennis2.NormalState(self)
 
     def score(self):
-        if self.is_win_score():
-          return self.gamestate_factory().handle_state()
-
-        elif self.is_equal_score():
-          return self.gamestate_factory().handle_state()
-
-        elif self.is_advantage_score():
-          return self.gamestate_factory().handle_state()
-        
-        elif self.is_onesided_score():
-          return self.gamestate_factory().handle_state()
-        
-        else:
-          return self.handle_normal()
-        
+        return self.gamestate_factory().generate_score_text()
     
     def P1Score(self):
         self.player1.set_point(self.player1.point() + 1)
