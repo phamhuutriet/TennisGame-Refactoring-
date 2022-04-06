@@ -88,9 +88,6 @@ class TennisGame2:
     def handle_onesided_score(self):
       return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
-    def is_normal_score(self):
-      return (self.player1.point() > self.player2.point() and self.p1points < 4) or (self.player2.point() > self.player1.point() and self.player2.point() < 4)
-
     def handle_normal(self):
       return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
@@ -130,15 +127,16 @@ class TennisGame2:
 
         elif self.is_equal_score():
           return self.handle_equal()
+
+        elif self.is_advantage_score():
+          return self.handle_advantage()
         
         elif self.is_onesided_score():
           return self.handle_onesided_score()
         
-        elif self.is_normal_score():
+        else:
           return self.handle_normal()
         
-        elif self.is_advantage_score():
-          return self.handle_advantage()
     
     def P1Score(self):
         self.p1points +=1
