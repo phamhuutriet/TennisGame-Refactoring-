@@ -129,6 +129,12 @@ class TennisGame2:
     def is_win_score(self):
       return self.player1_is_winner() or self.player2_is_winner()
 
+    def handle_winner(self):
+      if self.player1_is_winner():
+        return "Win for " + self.player1Name
+      if self.player2_is_winner():
+        return "Win for " + self.player2Name
+
     def score(self):
         result = ""
         P1res = ""
@@ -151,10 +157,7 @@ class TennisGame2:
         
         # Win state
         if self.is_win_score():
-          if self.player1_is_winner():
-              result = "Win for " + self.player1Name
-          if self.player2_is_winner():
-              result = "Win for " + self.player2Name
+          result = self.handle_winner()
         return result
     
     def P1Score(self):
