@@ -136,22 +136,20 @@ class TennisGame2:
         return "Win for " + self.player2Name
 
     def score(self):
-        result = ""
-        if self.is_equal_score():
-          result = self.handle_equal()
+        if self.is_win_score():
+          return self.handle_winner()
+
+        elif self.is_equal_score():
+          return self.handle_equal()
         
         elif self.is_onesided_score():
-          result = self.handle_onesided_score()
+          return self.handle_onesided_score()
         
         elif self.is_normal_score():
-          result = self.handle_normal()
+          return self.handle_normal()
         
         elif self.is_advantage_score():
-          result = self.handle_advantage()
-        
-        if self.is_win_score():
-          result = self.handle_winner()
-        return result
+          return self.handle_advantage()
     
     def P1Score(self):
         self.p1points +=1
