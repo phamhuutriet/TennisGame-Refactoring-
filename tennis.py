@@ -116,11 +116,7 @@ class TennisGame2:
       return self.is_onesided_score_player1() or self.is_onesided_score_player2()
 
     def handle_onesided_score(self):
-      P1res = P2res = ""
-      if self.is_onesided_score_player1():
-          result = self.handle_onesided_score_player(self.player1, self.player2)
-      elif self.is_onesided_score_player2():
-          result = self.handle_onesided_score_player(self.player1, self.player2)
+      result = self.handle_onesided_score_player(self.player1, self.player2)
       return result
 
     def score(self):
