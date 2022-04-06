@@ -116,9 +116,13 @@ class TennisGame2:
       if self.player2_is_winner():
         return "Win for " + self.player2.name()
 
+    def gamestate_factory(self):
+      if self.is_win_score():
+        return tennis2.WinnerState(self)
+
     def score(self):
         if self.is_win_score():
-          return self.handle_winner()
+          return self.gamestate_factory().handle_state()
 
         elif self.is_equal_score():
           return self.handle_equal()
