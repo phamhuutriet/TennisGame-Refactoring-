@@ -116,12 +116,18 @@ class TennisGame2:
 
     def handle_advantage(self):
       if self.player1_is_advantage():
-          result = "Advantage " + self.player1Name
-      
+        return "Advantage " + self.player1.name()
       elif self.player2_is_advantage():
-          result = "Advantage " + self.player2Name
+        return "Advantage " + self.player2.name()
 
-      return result
+    def player1_is_winner(self):
+      return self.p1points>=4 and self.p2points>=0 and (self.p1points-self.p2points)>=2
+
+    def player2_is_winner(self):
+      return self.p2points>=4 and self.p1points>=0 and (self.p2points-self.p1points)>=2
+
+    def is_win_score(self):
+      return self.player1_is_winner() or self.player2_is_winner()
 
     def score(self):
         result = ""
@@ -144,10 +150,11 @@ class TennisGame2:
           result = self.handle_advantage()
         
         # Win state
-        if (self.p1points>=4 and self.p2points>=0 and (self.p1points-self.p2points)>=2):
-            result = "Win for " + self.player1Name
-        if (self.p2points>=4 and self.p1points>=0 and (self.p2points-self.p1points)>=2):
-            result = "Win for " + self.player2Name
+        if self.is_win_score():
+          if self.player1_is_winner():
+              result = "Win for " + self.player1Name
+          if self.player2_is_winner():
+              result = "Win for " + self.player2Name
         return result
     
     def P1Score(self):
