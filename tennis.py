@@ -92,12 +92,7 @@ class TennisGame2:
       return self.is_onesided_score_player1() or self.is_onesided_score_player2()
 
     def handle_onesided_score(self):
-      P1res = P2res = ""
-      if self.player1.point() <= 3:
-        P1res = self.score_text_dict[self.player1.point()]
-      if self.player2.point() <= 3:
-        P2res = self.score_text_dict[self.player2.point()]
-      return P1res + "-" + P2res
+      return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
     def is_normal_score(self):
       return (self.p1points>self.p2points and self.p1points < 4) or (self.p2points>self.p1points and self.p2points < 4)
