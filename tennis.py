@@ -87,37 +87,21 @@ class TennisGame2:
           return "Deuce"
 
     def is_onesided_score_player1(self):
-      return self.p1points > 0 and self.p2points==0
+      return self.p1points > 0 and self.p2points == 0
 
     def is_onesided_score_player2(self):
-      return self.p2points > 0 and self.p1points==0
-
-    def handle_onesided_score_player2(self, player2):
-      P1res = P2res = ""
-      if (player2.point()==1):
-          P2res = "Fifteen"
-      if (player2.point()==2):
-          P2res = "Thirty"
-      if (player2.point()==3):
-          P2res = "Forty"
-      
-      P1res = "Love"
-      return P1res + "-" + P2res
-
-    def handle_onesided_score_player(self, player1, player2):
-      P1res = P2res = ""
-      if player1.point() <= 3:
-        P1res = self.score_text_dict[player1.point()]
-      if player2.point() <= 3:
-        P2res = self.score_text_dict[player2.point()]
-      return P1res + "-" + P2res
+      return self.p2points > 0 and self.p1points == 0
 
     def is_onesided_score(self):
       return self.is_onesided_score_player1() or self.is_onesided_score_player2()
 
     def handle_onesided_score(self):
-      result = self.handle_onesided_score_player(self.player1, self.player2)
-      return result
+      P1res = P2res = ""
+      if self.player1.point() <= 3:
+        P1res = self.score_text_dict[self.player1.point()]
+      if self.player2.point() <= 3:
+        P2res = self.score_text_dict[self.player2.point()]
+      return P1res + "-" + P2res
 
     def score(self):
         result = ""
