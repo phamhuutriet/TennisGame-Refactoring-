@@ -137,25 +137,18 @@ class TennisGame2:
 
     def score(self):
         result = ""
-        P1res = ""
-        P2res = ""
-        # Equal score state but it's not passed the matchpoint
         if self.is_equal_score():
           result = self.handle_equal()
         
-        # One-sided score on player1 side
         elif self.is_onesided_score():
           result = self.handle_onesided_score()
         
-        # Non-zero score on player1 side
         elif self.is_normal_score():
           result = self.handle_normal()
         
-        # Advantage state
         elif self.is_advantage_score():
           result = self.handle_advantage()
         
-        # Win state
         if self.is_win_score():
           result = self.handle_winner()
         return result
