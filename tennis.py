@@ -50,11 +50,6 @@ class TennisGame1:
 
 class TennisGame2:
     def __init__(self, player1Name, player2Name):
-        self.player1Name = player1Name
-        self.player2Name = player2Name
-        self.p1points = 0
-        self.p2points = 0
-
         self.score_text_dict = {
           0: "Love",
           1: "Fifteen",
@@ -66,7 +61,7 @@ class TennisGame2:
         self.player2 = tennis2.Player(player2Name)
         
     def won_point(self, playerName):
-        if playerName == self.player1Name:
+        if playerName == self.player1.name():
             self.P1Score()
         else:
             self.P2Score()
@@ -92,13 +87,13 @@ class TennisGame2:
       return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
     def player1_is_advantage(self):
-      return self.player1.point() > self.player2.point() and self.player2.point() >= 3
+      return self.player1.point() > self.player2.point() >= 3
 
     def player2_is_advantage(self):
-      return self.player2.point() > self.player1.point() and self.player1.point() >= 3
+      return self.player2.point() > self.player1.point() >= 3
 
     def is_advantage_score(self):
-      return self.player1_is_advantage() or self.player2_is_advantage()
+      return self.player1.point() >= 3 and self.player2.point() >= 3
 
     def handle_advantage(self):
       if self.player1_is_advantage():
@@ -117,9 +112,9 @@ class TennisGame2:
 
     def handle_winner(self):
       if self.player1_is_winner():
-        return "Win for " + self.player1Name
+        return "Win for " + self.player1.name()
       if self.player2_is_winner():
-        return "Win for " + self.player2Name
+        return "Win for " + self.player2.name()
 
     def score(self):
         if self.is_win_score():
@@ -139,11 +134,9 @@ class TennisGame2:
         
     
     def P1Score(self):
-        self.p1points +=1
         self.player1.set_point(self.player1.point() + 1)
     
     def P2Score(self):
-        self.p2points +=1
         self.player2.set_point(self.player2.point() + 1)
 
         
