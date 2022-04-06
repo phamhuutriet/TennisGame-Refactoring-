@@ -1,5 +1,6 @@
 from tennis_subclass import *
 from player_subclass import Player
+import tennis2_subclass as tennis2
 
 
 class TennisGame1:
@@ -60,6 +61,9 @@ class TennisGame2:
           2: "Thirty",
           3: "Forty"
         }
+
+        self.player1 = tennis2.Player(player1Name)
+        self.player2 = tennis2.Player(player2Name)
         
     def won_point(self, playerName):
         if playerName == self.player1Name:
@@ -110,13 +114,28 @@ class TennisGame2:
       P1res = "Love"
       return P1res + "-" + P2res
 
+    def handle_onesided_score_player(self, player):
+      P1res = P2res = ""
+      if (player.point()==1):
+          P2res = "Fifteen"
+      if (player.point()==2):
+          P2res = "Thirty"
+      if (player.point()==3):
+          P2res = "Forty"
+      
+      P1res = "Love"
+      return P1res + "-" + P2res
+
+    def handle_onesided_score_player(self, player):
+      pass
+
     def is_onesided_score(self):
       return self.is_onesided_score_player1() or self.is_onesided_score_player2()
 
-    def handle_onesided_score(self, P1res, P2res):
+    def handle_onesided_score(self):
+      P1res = P2res = ""
       if self.is_onesided_score_player1():
           result = self.handle_onesided_score_player1(P1res)
-      # One-sided score on player2 side
       elif self.is_onesided_score_player2():
           result = self.handle_onesided_score_player2(P2res)
       return result
@@ -131,7 +150,7 @@ class TennisGame2:
         
         # One-sided score on player1 side
         elif self.is_onesided_score():
-          result = self.handle_onesided_score(P1res, P2res)
+          result = self.handle_onesided_score()
         
         # Non-zero score on player1 side
         elif (self.p1points>self.p2points and self.p1points < 4):
@@ -172,9 +191,11 @@ class TennisGame2:
     
     def P1Score(self):
         self.p1points +=1
+        self.player1.set_point(self.player1.point() + 1)
     
     def P2Score(self):
         self.p2points +=1
+        self.player2.set_point(self.player2.point() + 1)
 
         
 class TennisGame3:
