@@ -16,6 +16,7 @@ class GameState:
   def __init__(self, game):
       self.player1 = game.player1
       self.player2 = game.player2
+      self.score_text_dict = game.score_text_dict
 
   def handle_state(self):
     pass
@@ -45,3 +46,16 @@ class AdvantageState(GameState):
       return "Advantage " + self.player1.name()
     elif self.player2_is_advantage():
       return "Advantage " + self.player2.name()
+
+class EqualState(GameState):
+  def is_not_matchpoint(self):
+    return self.player1.point() < 3
+
+  def handle_state(self):
+    if self.is_not_matchpoint():
+      return self.score_text_dict[self.player1.point()] + "-All"
+    return "Deuce"
+
+class OneSidedState(GameState):
+  def handle_state(self):
+      return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]

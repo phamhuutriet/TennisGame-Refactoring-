@@ -80,9 +80,6 @@ class TennisGame2:
     def is_onesided_score(self):
       return self.player1.point() == 0 or self.player2.point() == 0
 
-    def handle_onesided_score(self):
-      return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
-
     def handle_normal(self):
       return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
@@ -96,21 +93,25 @@ class TennisGame2:
     def gamestate_factory(self):
       if self.is_win_score():
         return tennis2.WinnerState(self)
+      elif self.is_equal_score():
+        return tennis2.EqualState(self)
       elif self.is_advantage_score():
         return tennis2.AdvantageState(self)
+      elif self.is_onesided_score():
+        return tennis2.OneSidedState(self)
 
     def score(self):
         if self.is_win_score():
           return self.gamestate_factory().handle_state()
 
         elif self.is_equal_score():
-          return self.handle_equal()
+          return self.gamestate_factory().handle_state()
 
         elif self.is_advantage_score():
           return self.gamestate_factory().handle_state()
         
         elif self.is_onesided_score():
-          return self.handle_onesided_score()
+          return self.gamestate_factory().handle_state()
         
         else:
           return self.handle_normal()
