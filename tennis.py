@@ -72,29 +72,30 @@ class TennisGame2:
             self.P2Score()
   
     def is_not_matchpoint(self):
-      return self.p1points < 3
+      return self.player1.point() < 3
 
     def is_matchpoint(self):
-      return self.p1points > 2
+      return self.player1.point() > 2
 
     def is_equal_score(self):
-      return self.p1points == self.p2points
+      return self.player1.point() == self.player2.point()
     
     def handle_equal(self):
       if self.is_not_matchpoint():
-          return self.score_text_dict[self.p1points] + "-All"
+          return self.score_text_dict[self.player1.point()] + "-All"
       if self.is_matchpoint():
           return "Deuce"
 
     def is_onesided_score_player1(self):
       return self.p1points > 0 and self.p2points==0
 
-    def handle_onesided_score_player1(self, P1res):
-      if (self.p1points==1):
+    def handle_onesided_score_player1(self):
+      P1res = P2res = ""
+      if (self.player1.point()==1):
           P1res = "Fifteen"
-      if (self.p1points==2):
+      if (self.player1.point()==2):
           P1res = "Thirty"
-      if (self.p1points==3):
+      if (self.player1.point()==3):
           P1res = "Forty"
       
       P2res = "Love"
@@ -117,17 +118,14 @@ class TennisGame2:
     def handle_onesided_score_player(self, player):
       P1res = P2res = ""
       if (player.point()==1):
-          P2res = "Fifteen"
+          P1res = "Fifteen"
       if (player.point()==2):
-          P2res = "Thirty"
+          P1res = "Thirty"
       if (player.point()==3):
-          P2res = "Forty"
+          P1res = "Forty"
       
-      P1res = "Love"
+      P2res = "Love"
       return P1res + "-" + P2res
-
-    def handle_onesided_score_player(self, player):
-      pass
 
     def is_onesided_score(self):
       return self.is_onesided_score_player1() or self.is_onesided_score_player2()
@@ -135,7 +133,7 @@ class TennisGame2:
     def handle_onesided_score(self):
       P1res = P2res = ""
       if self.is_onesided_score_player1():
-          result = self.handle_onesided_score_player1(P1res)
+          result = self.handle_onesided_score_player(self.player1)
       elif self.is_onesided_score_player2():
           result = self.handle_onesided_score_player2(P2res)
       return result
