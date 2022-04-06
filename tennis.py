@@ -74,17 +74,13 @@ class TennisGame2:
     def is_not_matchpoint(self):
       return self.player1.point() < 3
 
-    def is_matchpoint(self):
-      return self.player1.point() > 2
-
     def is_equal_score(self):
       return self.player1.point() == self.player2.point()
     
     def handle_equal(self):
       if self.is_not_matchpoint():
           return self.score_text_dict[self.player1.point()] + "-All"
-      if self.is_matchpoint():
-          return "Deuce"
+      return "Deuce"
 
     def is_onesided_score_player1(self):
       return self.p1points > 0 and self.p2points == 0
