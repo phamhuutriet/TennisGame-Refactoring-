@@ -82,29 +82,23 @@ class TennisGame2:
           return self.score_text_dict[self.player1.point()] + "-All"
       return "Deuce"
 
-    def is_onesided_score_player1(self):
-      return self.p1points > 0 and self.p2points == 0
-
-    def is_onesided_score_player2(self):
-      return self.p2points > 0 and self.p1points == 0
-
     def is_onesided_score(self):
-      return self.is_onesided_score_player1() or self.is_onesided_score_player2()
+      return self.player1.point() == 0 or self.player2.point() == 0
 
     def handle_onesided_score(self):
       return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
     def is_normal_score(self):
-      return (self.p1points>self.p2points and self.p1points < 4) or (self.p2points>self.p1points and self.p2points < 4)
+      return (self.player1.point() > self.player2.point() and self.p1points < 4) or (self.player2.point() > self.player1.point() and self.player2.point() < 4)
 
     def handle_normal(self):
       return self.score_text_dict[self.player1.point()] + "-" + self.score_text_dict[self.player2.point()]
 
     def player1_is_advantage(self):
-      return self.p1points > self.p2points and self.p2points >= 3
+      return self.player1.point() > self.player2.point() and self.player2.point() >= 3
 
     def player2_is_advantage(self):
-      return self.p2points > self.p1points and self.p1points >= 3
+      return self.player2.point() > self.player1.point() and self.player1.point() >= 3
 
     def is_advantage_score(self):
       return self.player1_is_advantage() or self.player2_is_advantage()
@@ -116,10 +110,10 @@ class TennisGame2:
         return "Advantage " + self.player2.name()
 
     def player1_is_winner(self):
-      return self.p1points>=4 and self.p2points>=0 and (self.p1points-self.p2points)>=2
+      return self.player1.point() >= 4 and self.player2.point() >= 0 and (self.player1.point()-self.player2.point()) >=2
 
     def player2_is_winner(self):
-      return self.p2points>=4 and self.p1points>=0 and (self.p2points-self.p1points)>=2
+      return self.player2.point() >= 4 and self.player1.point() >= 0 and (self.player2.point()-self.player1.point()) >=2
 
     def is_win_score(self):
       return self.player1_is_winner() or self.player2_is_winner()
